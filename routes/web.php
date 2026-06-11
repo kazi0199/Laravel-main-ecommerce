@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\{Auth, Route};
 use App\Http\Controllers\{AdminController, CartController, HomeController, ShopController, UserController, WishlistController};
+use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Middleware\AuthAdmin;
+use Illuminate\Support\Facades\{Auth, Route};
 
 Auth::routes();
 
@@ -52,6 +53,21 @@ Route::get('/account-orders/details/{order_id}',[UserController::class,'order_de
 Route::put('/account-orders/cancel-order',[UserController::class,'order_cancel'])->name('user.order.cancel');
 
 });
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout'])->name('example1');
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout'])->name('example2');
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
 
 
 Route::middleware(['auth',AuthAdmin::class])->group(function(){

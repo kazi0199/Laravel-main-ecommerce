@@ -230,7 +230,33 @@ class CartController extends Controller
             Session::forget('coupon');
             Session::forget('discounts');
             Session::put('order_id',$order->id);
-            return redirect()->route('cart.order.confirmation');
+
+
+            # CUSTOMER INFORMATION
+            // $post_data['cus_name'] = 'Customer Name';
+            // $post_data['cus_email'] = 'customer@mail.com';
+            // $post_data['cus_add1'] = 'Customer Address';
+            // $post_data['cus_add2'] = "";
+            // $post_data['cus_city'] = "";
+            // $post_data['cus_state'] = "";
+            // $post_data['cus_postcode'] = "";
+            // $post_data['cus_country'] = "Bangladesh";
+            // $post_data['cus_phone'] = '8801XXXXXXXXX';
+            // $post_data['cus_fax'] = "";
+
+            if($request->mode == "card")
+            {
+                return redirect()->route('example1');
+                
+            } elseif($request->mode == "paypal")
+            {
+                return redirect()->route('example2');
+            } elseif($request->mode == "cod")
+            {
+                return redirect()->route('cart.order.confirmation');
+            }
+
+           // return redirect()->route('cart.order.confirmation');
 
     }
 
