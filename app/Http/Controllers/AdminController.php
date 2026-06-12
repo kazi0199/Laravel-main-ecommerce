@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\{Carbon, Str};
 use Illuminate\Support\Facades\{DB, File, Session};
+
 use App\Models\{Brand, Category, Contact, Coupon, Order, OrderItem, Product, Slide, Transaction};
 use Intervention\Image\Laravel\Facades\Image;
+
 
 class AdminController extends Controller
 {
