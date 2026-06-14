@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\{AdminController, CartController, HomeController, ShopController, UserController, WishlistController};
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\StripeController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\{Auth, Route};
 
@@ -67,6 +68,12 @@ Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
+
+
+// stripe webhooks
+
+Route::get('/stripe/success', [StripeController::class, 'stripeSuccess'])->name('stripe.success');
+Route::get('/stripe/cancel', [StripeController::class, 'stripeCancel'])->name('stripe.cancel');
 
 
 
